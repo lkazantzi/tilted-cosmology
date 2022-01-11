@@ -8,15 +8,19 @@
 <img src="preview.png" width="820" title="preview" />
 </p>
 
-This is the repository that contains the corresponding Mathematica and Python files as well as useful comments that reproduce the figures of our work. Regarding the relevant Mathematica codes, the file `Tilted Cosmology.nb` corresponds to the Mathematica code in order to obtain the results of the maximum likelihood method for all the models described in Table I. The file `Information Criteria.nb` corresponds to the calculations of Table II. The best fit results were obtained with Mathematica 11. Regarding the relevant Python codes, ....
+This is the repository that contains the corresponding Mathematica and Python files as well as useful comments that reproduce the figures of our work. 
 
 
 ## Abstract
 ...
 
 
-## Instructions - Python Files
-....
+## Instructions
+### Mathematica Files
+Regarding the relevant Mathematica codes, the file `Tilted Cosmology.nb` corresponds to the Mathematica code in order to obtain the results of the maximum likelihood method for all the models described in Table I. The file `Information Criteria.nb` corresponds to the calculations of Table II. The best fit results were obtained with Mathematica 11. 
+
+### Python Files
+Regarding the relevant Python codes, ....
 
 
 ## Citing the paper 
