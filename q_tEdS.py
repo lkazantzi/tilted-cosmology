@@ -38,8 +38,6 @@ rcp['legend.fontsize'] = 15
 rcp['xtick.direction'] = 'in'
 rcp['ytick.major.width'] = 2
 rcp['ytick.minor.width'] = 2
-#import corner
-from chainconsumer import ChainConsumer
 
 
 c_km = (c.to('km/s').value)
@@ -363,83 +361,6 @@ print(dbicteds, dbictedsafxd)
 
 
 
-flatchains7 = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_EdS_1048/flatchains_eds_largePriors")
-flatchainsteds_afxd = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_EdS_1048/flatchains_edsa_longerchain")
 
-
-def quantile(sorted_array, f):
-    """Return the quantile element from sorted_array, where f is [0,1]
-    using linear interpolation.
-
-    Based on the description of the GSL routine
-    gsl_stats_quantile_from_sorted_data - e.g.
-    http://www.gnu.org/software/gsl/manual/html_node/Median-and-Percentiles.html
-    but all errors are my own.
-
-    sorted_array is assumed to be 1D and sorted.
-    """
-    sorted_array = np.asarray(sorted_array)
-
-    if len(sorted_array.shape) != 1:
-        raise RuntimeError("Error: input array is not 1D")
-    n = sorted_array.size
-
-    q = (n - 1) * f
-    i = np.int64(np.floor(q))
-    delta = q - i
-
-    return (1.0 - delta) * sorted_array[i] + delta * sorted_array[i + 1]
-
-quantile(flatchains7[:,0], 0.5) ### the median value
-
-
-def get_error_estimates123(x, sorted=False, sigma=True):
-    """Compute the median and (-1,+1) sigma values for the data.
-
-    Parameters
-    ----------
-    x : array of numbers
-       The input values.
-    sorted : bool, optional
-       If ``False``, the default, then ``x`` is assumed to not be sorted.
-    sigma : if ''True'', estimate the 1-sigma confidence level
-    If 'False' calculate the -sigma
-    Returns
-    -------
-    (median, lsig, usig)
-       The median, value that corresponds to -1 sigma, and value that
-       is +1 sigma, for the input distribution.
-
-    Examples
-    --------
-    >>> (m, l, h) = get_error_estimates(x)
-
-    """
-    xs = np.asarray(x)
-    if not sorted:
-        xs.sort()
-        xs = np.array(xs)
-    listm = []
-    listl = []
-    listh = []
-    if sigma == True:
-        sigfrac = 0.683    ### 1-sigma
-        #sigfrac = 0.9545    ### 2-sigma
-        #sigfrac = 0.9973     ### 3-sigma
-        median = quantile(xs, 0.5)
-        lval = quantile(xs, (1 - sigfrac) / 2.0)
-        hval = quantile(xs, (1 + sigfrac) / 2.0)
-        listm.append(median)
-        listl.append( lval-median)
-    else:
-        sigfrac = 0.9545    ### 2-sigma
-        median = quantile(xs, 0.5)
-        lval = quantile(xs, (1 - sigfrac) / 2.0)
-        hval = quantile(xs, (1 + sigfrac) / 2.0)
-        listm.append(median)
-        listl.append( lval-median)
-    listh.append(hval-median)
-    return (listm, listl, listh)
-get_error_estimates123(flatchains7[:,1],sigma=True)
 
 
