@@ -39,7 +39,6 @@ rcp['xtick.direction'] = 'in'
 rcp['ytick.major.width'] = 2
 rcp['ytick.minor.width'] = 2
 
-
 c_km = (c.to('km/s').value)
 print(c_km)
 H0 = 70.
