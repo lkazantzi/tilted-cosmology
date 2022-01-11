@@ -40,8 +40,6 @@ rcp['legend.fontsize'] = 15
 rcp['xtick.direction'] = 'in'
 rcp['ytick.major.width'] = 2
 rcp['ytick.minor.width'] = 2
-#import corner
-from chainconsumer import ChainConsumer
 
 
 c_km = (c.to('km/s').value)
@@ -319,6 +317,9 @@ ax.set_yticks([-0.5,0, 0.2, 0.5])
 ax.legend(fontsize = 'large', loc="lower right")
 plt.show()
 
+###########################
+### RESULTS OF TABLE II ###
+###########################
 
 ### AIC + BIC criteria for model selection between the models ( ΛCDM + t-Λ ) , ( ΛCDM + t-Λ (α fixed) ) ###
 ### For the ΛCDM ###
