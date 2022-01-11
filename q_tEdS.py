@@ -325,7 +325,9 @@ ax.set_yticks([-0.5,0, 0.2, 0.5])
 ax.legend(fontsize = 'large', loc="lower right")
 plt.show()
 
-
+###########################
+### RESULTS OF TABLE II ###
+###########################
 ### AIC + BIC criteria for model selection between the models ( ΛCDM + t-Λ ) , ( ΛCDM + t-Λ (α fixed) ) ###
 ### For the ΛCDM ###
 AIC_qlcdm = BFlcdm[2] + 2*2
