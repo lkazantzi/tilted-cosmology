@@ -26,10 +26,10 @@ from lmfit import Parameters, fit_report, minimize, Minimizer
 cosmo = FlatLambdaCDM(H0=70, Om0=0.3)
 from matplotlib import rcParams as rcp
 from matplotlib import rc
-plt.rcParams['figure.figsize'] = [9, 6]
-plt.rcParams['figure.dpi'] = 80
-plt.rcParams['xtick.labelsize'] = 15
-plt.rcParams['ytick.labelsize'] = 0
+rcp['figure.figsize'] = [9, 6]
+rcp['figure.dpi'] = 80
+rcp['xtick.labelsize'] = 15
+rcp['ytick.labelsize'] = 0
 rcp['axes.formatter.useoffset'] = False
 rcp['axes.linewidth'] = 1.5
 rcp['axes.axisbelow'] = False
