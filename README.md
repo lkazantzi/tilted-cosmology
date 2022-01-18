@@ -20,7 +20,7 @@ This is the repository that contains the corresponding Mathematica and Python fi
 Regarding the relevant Mathematica codes, the file `Tilted Cosmology.nb` corresponds to the Mathematica code in order to obtain the results of the maximum likelihood method for all the models described in Table I. The file `Information Criteria.nb` corresponds to the calculations of Table II. The best fit results were obtained with Mathematica 11. 
 
 ### Python Files
-Regarding the relevant Python codes, ....
+Regarding the relevant Python codes, the files q_tEdS.py and q_tlcdm.py contain the functions and the optimisation methods developped for calculating the best-fit parameters for the tilted Einstein-de Sitter and the tilted ΛCDM model respectively. The files above contain also the calculations for the information criteria, in Table II. The Python libraries needed to run the files are reported in the requirements.txt. 
 
 
 ## Citing the paper 
