@@ -240,6 +240,7 @@ print(fit_report(result))
     b:     3.71009900 (init = 3)
     Mcal:  23.8155471 (init = 23.8)
 '''
+### The maximum likelihood values for the t-Λ model are 
 BF = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_LCDM_1048/deMcal_1048_LCDM ")
 #BF[0] = 0.52660166
 #BF[1] = 3.71009900
@@ -269,6 +270,7 @@ print(fit_report(result_a))
     b:     5.20420255 (init = 5)
     Mcal:  23.8072574 (init = 23.8)
 '''
+### The maximum likelihood values for the t-Λ (α fixed) model are 
 BFa = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_LCDM_1048/bMcal_1048_LCDMa")
 #BFa[0] = 5.20420255
 #BFa[1] = 23.8072574
