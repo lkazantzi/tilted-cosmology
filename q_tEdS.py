@@ -248,6 +248,7 @@ print(fit_report(result_eds))
     b:     6.65570490 (init = 6)
     Mcal:  23.8145347 (init = 23.8)
 '''
+### The maximum likelihood values for the t-EdS model are 
 BF_eds = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_EdS_1048/abMcal_1048_EdS ")
 #BF_eds[0] = 0.52064421
 #BF_eds[1] = 6.65570490
@@ -277,6 +278,7 @@ print(fit_report(result_edsa))
     b:     8.47405255 (init = 6)
     Mcal:  23.8082143 (init = 23.8)
 '''
+### The maximum likelihood values for the t-EdS (α fixed) model are 
 BF_edsa = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_EdS_1048/bMcal_EdSa ")
 #BF_edsa[0] = 8.47410191 
 #BF_edsa[1] =  23.8082156
