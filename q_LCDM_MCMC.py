@@ -54,7 +54,6 @@ H0 = 70.
 # Get the data from the github repository Pantheon of Dan Scolnic #
 # https://github.com/dscolnic/Pantheon/blob/master/lcparam_full_long_zhel.txt #
 data = np.loadtxt('/home/kerky/anaconda3/SN1A DATA/PANTHEON_DATA/Scolnic_data_updated.txt', usecols=[1,2,4,5])
-
 ### list with all the systematics as found in the PANTHEON catalog ###
 
 # get the full systematics from the same repository #
