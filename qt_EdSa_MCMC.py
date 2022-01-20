@@ -186,14 +186,15 @@ flatchains_edsa = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_
 ### # The maximum likelihood values for the t-EdS (a fixed) model are found in the q_tEdS.py
 BF_EdSa =  np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_EdS_1048/bMcal_EdSa ")
 
-params = ["b", "Mcal"]
 ### plot the chains for each parameter 
+params = ["b", "Mcal"]
 for i in range(2):
     plt.figure()
     plt.title(params[i])
     x = np.arange(len(flatchains_edsa[:,i]))
 
     plt.plot(x,flatchains_edsa[:,i])
+    plt.axhline(y = BF_EdSa[i], color = "red")
 
     plt.show()
 
