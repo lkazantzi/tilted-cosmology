@@ -182,21 +182,18 @@ for i in range(2):
     x = np.arange(len(flatchains2000[:,i]))
 
     plt.plot(x,flatchains2000[:,i])
-
+    plt.axhline(y = BF_LCDM[i], color = "red")
     plt.show()
 
 
  ### Compute the sigma errors ###
-
-### Compute the sigma errors ###
 def quantile(sorted_array, f):
-    """Return the quantile element from sorted_array, where f is [0,1]
-    using linear interpolation.
+    """Return the quantile element from sorted array. The quantile is determined by the f, where f is [0,1]. 
+    For example, to compute the value of the 75th percentile f should have the value 0.75.
 
     Based on the description of the GSL routine
     gsl_stats_quantile_from_sorted_data - e.g.
     http://www.gnu.org/software/gsl/manual/html_node/Median-and-Percentiles.html
-    but all errors are my own.
 
     sorted_array is assumed to be 1D and sorted.
     """
@@ -205,12 +202,17 @@ def quantile(sorted_array, f):
     if len(sorted_array.shape) != 1:
         raise RuntimeError("Error: input array is not 1D")
     n = sorted_array.size
-
-    q = (n - 1) * f
-    i = np.int64(np.floor(q))
-    delta = q - i
+    
+    """
+    The quantile is found by interpolation using the formula below 
+    """
+    
+    quantile = (n - 1) * f
+    i = np.int64(np.floor(quantile))
+    delta = quantile - i
 
     return (1.0 - delta) * sorted_array[i] + delta * sorted_array[i + 1]
+
 
 
 ### Calculate the 68%, 95%, 99.7% C.L. of the parameters
