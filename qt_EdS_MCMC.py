@@ -187,15 +187,17 @@ BF_eds = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_EdS_1048/
 ### The flatchains from the MCMC analysis discarded the burn-in steps 
 flatchains2000 = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_EdS_1048/flatchains_eds_2000")
 
-params = ["a", "b", "Mcal"]
+
 ### plot the chains for each parameter 
+params = ["a", "b", "Mcal"]
+
 for i in range(3):
     plt.figure()
     plt.title(params[i])
     x = np.arange(len(flatchains2000[:,i]))
 
     plt.plot(x,flatchains2000[:,i])
-
+    plot.axhline(y = BF_eds[i], color = "red")
     plt.show()
 
 
