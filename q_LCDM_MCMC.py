@@ -172,7 +172,7 @@ print("Number of independent samples is {}".format(len(flat_samples_eds)))
 ### The flatchains from the MCMC analysis discarded the burn-in steps 
 flatchains2000 = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q_LCDM/flatchains_lcdm_2000")
 ###  The maximum likelihood values for the ΛCDM model are found in the q_tEdS.py and q_tlcdm.py
-BF_LCDM = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q_LCDM/OmMcal_1048_LCDM ")
+BF_LCDM = [0.299, 23.809]
 
 params = ["Om", "Mcal"]
 ### plot the chains for each parameter 
