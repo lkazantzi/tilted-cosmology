@@ -169,12 +169,6 @@ with Pool() as pool:
 ####You can use this number to thin out chains to produce independent samples.
 a_ac, b_ac, M_cal_ac = sampler_eds.get_autocorr_time(quiet=True)
 print("The autocorrelation length for a is {0} and b is {1} and M_cal is {2}".format(a_ac, b_ac, M_cal_ac))
-### Calculate the acceptance ratio. Acceptance ratio has an entry for each walker. In this case, 
-### it is a 100-dimensional vector 
-af = sampler_eds.acceptance_fraction
-print( "Mean acceptance fraction:", np.mean(af))
-
-
 np.savetxt("fullflatchains_eds_2000 ",sampler_eds.get_chain(flat=True))
 ### thin out the chain
 flat_samples_eds = sampler_eds.get_chain(discard=20, flat=True, thin=(int(max[a_ac, b_ac, M_cal_ac])))
@@ -182,8 +176,7 @@ np.savetxt("flatchains_eds_2000 ",flat_samples_eds)
 
 print("Number of independent samples is {}".format(len(flat_samples_eds)))
 ### the best-fit values of the tilted Enstein-de Sitter model (t-EdS)
-BF_eds = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_EdS_1048/abMcal_1048_EdS ")
-
+BF_eds = [0.521, 6.66, 23.815]
 ### The flatchains from the MCMC analysis discarded the burn-in steps 
 flatchains2000 = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_EdS_1048/flatchains_eds_2000")
 
@@ -195,7 +188,6 @@ for i in range(3):
     plt.figure()
     plt.title(params[i])
     x = np.arange(len(flatchains2000[:,i]))
-
     plt.plot(x,flatchains2000[:,i])
     plot.axhline(y = BF_eds[i], color = "red")
     plt.show()
