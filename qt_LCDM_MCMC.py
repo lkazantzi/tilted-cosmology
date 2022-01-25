@@ -186,6 +186,7 @@ achains = flatchains_lcdm2000[:,0]
 bchains = flatchains_lcdm2000[:,1]
 Mcalchains = flatchains_lcdm2000[:,2]
 ### the best-fit values of the tilted ΛCDM model (t-ΛCDM)
+
 BF = [0.5266, 3.7101, 23.8155]
 
 ### plot the chains for each parameter 
