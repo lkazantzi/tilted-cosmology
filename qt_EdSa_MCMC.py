@@ -129,7 +129,6 @@ def chi_edsa(params):
 #    MCMC               #
 #                       #
 ######################### 
-theta = [8.47, 23.809]
 
 ### Define the prior function
 def lnprior_eds(theta):
@@ -169,11 +168,6 @@ with Pool() as pool:
 b_ac, M_cal_ac = sampler_eds.get_autocorr_time(quiet=True)
 print("The autocorrelation length for a is {0} and b is {1} and M_cal is {2}".format(b_ac, M_cal_ac))
 
-### Calculate the acceptance ratio. Acceptance ratio has an entry for each walker. In this case, 
-### it is a 100-dimensional vector 
-af = sampler_eds.acceptance_fraction
-print( "Mean acceptance fraction:", np.mean(af))
-
 np.savetxt("fullflatchains_edsa_2000 ",sampler_eds.get_chain(flat=True))
 ### thin out the chain
 flat_samples_eds = sampler_eds.get_chain(discard=20, flat=True, thin=(int(max[b_ac, M_cal_ac])))
@@ -184,7 +178,7 @@ print("Number of independent samples is {}".format(len(flat_samples_eds)))
 ### The flatchains from the MCMC analysis discarded the burn-in steps 
 flatchains_edsa = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_EdS_1048/flatchains_edsa_2000")
 ### # The maximum likelihood values for the t-EdS (a fixed) model are found in the q_tEdS.py
-BF_EdSa =  np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_EdS_1048/bMcal_EdSa ")
+BF_EdSa =  [8.47, 23.808]
 
 ### plot the chains for each parameter 
 params = ["b", "Mcal"]
