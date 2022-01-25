@@ -173,7 +173,6 @@ with Pool() as pool:
 a_ac, b_ac, M_cal_ac = sampler_lcdm.get_autocorr_time(quiet=True)
 print("The autocorrelation length for a is {0} and b is {1} and M_cal is {2}".format(a_ac, b_ac, M_cal_ac))
 
-
 np.savetxt("fullflatchains_lcdm2000 ",sampler_lcdm.get_chain(flat=True))
 ### thin out the chain
 flat_samples_lcdm = sampler_lcdm.get_chain(discard=20, flat=True, thin=(int(max[a_ac, b_ac, M_cal_ac])))
@@ -187,8 +186,7 @@ achains = flatchains_lcdm2000[:,0]
 bchains = flatchains_lcdm2000[:,1]
 Mcalchains = flatchains_lcdm2000[:,2]
 ### the best-fit values of the tilted ΛCDM model (t-ΛCDM)
-BF = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_LCDM_1048/deMcal_1048_LCDM ")
-### a = BF[0] = 0.5266, b = BF[1] = 3.7101, Mcal = 23.8155
+BF = [0.5266, 3.7101, 23.8155]
 
 ### plot the chains for each parameter 
 params = ["a", "b", "Mcal"]
