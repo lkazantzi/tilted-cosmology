@@ -12,7 +12,7 @@ This is the repository that contains the corresponding Mathematica and Python fi
 
 
 ## Abstract
-...
+We study a parametrization of the deceleration parameter in a tilted universe, namely a cosmological model equipped with two families of observers. The first family follows the smooth Hubble flow, while the second are the real observers residing in a typical galaxy inside a bulk flow and moving relative to the smooth Hubble expansion with finite peculiar velocity. We use the compilation of Type Ia Supernovae (SnIa) data, as described in the Pantheon dataset, to find the quality of fit to the data and study the redshift evolution of the deceleration parameter. In so doing, we consider two alternative scenarios, assuming that the bulk-flow observers live in the ΛCDM and in the Einstein-de Sitter universe. We show that a tilted Einstein-de Sitter model can reproduce the recent acceleration history of the universe, without the need of a cosmological constant or dark energy, but by simply accounting for the linear effects of peculiar motions. By means of a Markov Chain Monte Carlo (MCMC) method, we also constrain the magnitude and the uncertainties of the parameters of the two models. From our statistical analysis, we find that the tilted Einstein-de Sitter model, equipped with one or two additional parameters that describe the assumed large-scale velocity flows, performs similar to the standard ΛCDM paradigm in the context of model selection criteria (Akaike Information Criterion and Bayesian Information Criterion). 
 
 
 ## Instructions
