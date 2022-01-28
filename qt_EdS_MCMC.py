@@ -289,4 +289,3 @@ cc = ChainConsumer()
 c = cc.add_chain(flatchains2000[:,:], parameters=params)
 c.configure(kde= True, max_ticks=7, summary = False, shade_alpha=0.9, tick_font_size=11, label_font_size=15, sigmas=[1, 2], linewidths=1.2, colors="#673AB7", sigma2d = False, shade =True, flip = False)
 fig = c.plotter.plot(figsize=2.0, extents=[[0.39, 0.68], [0, 25], [23.75, 23.875]], display=True, truth = [BF_eds[0], BF_eds[1], BF_eds[2]])
-
