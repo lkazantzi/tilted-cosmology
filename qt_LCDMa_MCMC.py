@@ -25,7 +25,7 @@ from matplotlib import rcParams as rcp
 rcp['figure.figsize'] = [9, 6]
 rcp['figure.dpi'] = 80
 rcp['xtick.labelsize'] = 15
-rcp['ytick.labelsize'] = 0
+rcp['ytick.labelsize'] = 15
 rcp['axes.formatter.useoffset'] = False
 rcp['axes.linewidth'] = 1.5
 rcp['axes.axisbelow'] = False
@@ -273,7 +273,7 @@ print("The 1 sigma error of the parameter Mcal is : ",  get_error_estimates123(f
 
 ### USE CHAIN CONSUMER TO GENERATE PLOTS ###
 
-params = ["b", r"${M}$"]
+params = ["b",r"${\cal{M}}$"]
 cc = ChainConsumer()
 c = cc.add_chain(flatchains_qla_LCDM[:,:], parameters=params)
 truth =  [BF_aLCDM[0], BF_aLCDM[1]]
