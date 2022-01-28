@@ -27,7 +27,7 @@ from matplotlib import rc
 rcp['figure.figsize'] = [9, 6]
 rcp['figure.dpi'] = 80
 rcp['xtick.labelsize'] = 15
-rcp['ytick.labelsize'] = 0
+rcp['ytick.labelsize'] = 15
 rcp['axes.formatter.useoffset'] = False
 rcp['axes.linewidth'] = 1.5
 rcp['axes.axisbelow'] = False
@@ -108,14 +108,14 @@ def dc_eds(z):
 ### Deceleration parameter in the tilted model using the EdS comoving distance ( t-EdS ) ###
 def q_eds(z,a,b):
     return 0.5 *(1 -(1/(((np.power(dc_eds(z), 3))*b)+a)))
-qv = np.vectorize(q_eds)
+qv_eds= np.vectorize(q_eds)
 
 
 ### Deceleration parameter in the tilted model using the EdS comoving distance & 
 # fixed value of the parameter a (a = 0.5) ( t-EdS (α fixed) ) ###
 def qa_eds(z,b):
     return 0.5 *(1 -(1/(((np.power(dc_eds(z), 3))*b)+0.5)))
-qva = np.vectorize(qa_eds)
+qva_eds = np.vectorize(qa_eds)
 
 ### standard ΛCDM q parametrization ###
 def q_LCDM(z, Om, w=-1):    ### q in LCDM model with w=-1 
@@ -304,12 +304,12 @@ BFlcdm = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q_LCDM/OmMcal_
 
 ### Plot of the t-EdS, t-EdS (α fixed) and standard LCDM models ###
 fig, ax = plt.subplots()
-l = np.linspace(0.0, 6, 900)
-plt.plot(l,qv(l,BF_eds[0], BF_eds[1]), color = 'yellow', label=(r"$\frac{ 1 } { 2 }\left(1-\frac{1}{0.5+b(\chi_{EdS})^3}\right)$"))
+l = np.linspace(0.0, 3, 900)
+plt.plot(l,qv_eds(l,BF_eds[0], BF_eds[1]), color = 'r', label=(r"$\frac{ 1 } { 2 }\left(1-\frac{1}{a+b(\bar{\chi}_{EdS})^3}\right)$"))
 
-plt.plot(l,qva(l,BF_edsa[0]), color = 'r',label=(r"$\frac{ 1 } { 2 }\left(1-\frac{1}{a+b(\chi_{EdS})^3}\right)$"))
+plt.plot(l,qva_eds(l,BF_edsa[0]), color = 'yellow', label=(r"$\frac{ 1 } { 2 }\left(1-\frac{1}{0.5+b(\bar{\chi}_{EdS})^3}\right)$"))
 
-plt.plot(l,q_LCDM(l, BFlcdm[0]), color = 'b', label='qLCDM')
+plt.plot(l,q_LCDM(l, BFlcdm[0]), color = 'blue', linestyle = "--", label = (r"$q_{\Lambda CDM}$"))
 
 plt.rc('text', usetex=True)
 ax.spines['bottom'].set_position('zero')
@@ -320,10 +320,11 @@ ax.spines['top'].set_color('none')
 # Show ticks in the left and lower axes only
 ax.xaxis.set_ticks_position('bottom')
 ax.yaxis.set_ticks_position('left')
-plt.xlabel('redshift (z)', loc='right')
-ax.set_xticks([0.6, 1,2,3,4, 5, 6])
-ax.set_yticks([-0.5,0, 0.2, 0.5])
-ax.legend(fontsize = 'large', loc="lower right")
+ax.set_xlabel('redshift (z)', loc='right')
+ax.set_ylabel(' $\widetilde{q}$', loc='top', rotation = 0)
+ax.set_yticks([-0.5, -0.4, -0.2, 0.2, 0.5])
+ax.set_xticks([0.5, 1,1.5, 2])
+ax.legend(fontsize = 'small', loc="lower right")
 plt.show()
 
 ###########################
