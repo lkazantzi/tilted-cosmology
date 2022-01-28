@@ -278,7 +278,6 @@ def get_error_estimates123(x, sorted=False, sigma="a"):
 print("The 1 sigma error of the parameter Om is : ",  get_error_estimates123(flatchains2000[:, 0], sigma="a"))
 print("The 1 sigma error of the parameter Mcal is : ",  get_error_estimates123(flatchains2000[:, 1], sigma="a"))
 
-
 ### USE CHAIN CONSUMER TO GENERATE PLOTS ###
 
 params = ["Om", "Mcal"]
