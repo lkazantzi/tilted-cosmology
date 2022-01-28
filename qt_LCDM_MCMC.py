@@ -26,7 +26,7 @@ from matplotlib import rcParams as rcp
 rcp['figure.figsize'] = [9, 6]
 rcp['figure.dpi'] = 80
 rcp['xtick.labelsize'] = 15
-rcp['ytick.labelsize'] = 0
+rcp['ytick.labelsize'] = 15
 rcp['axes.formatter.useoffset'] = False
 rcp['axes.linewidth'] = 1.5
 rcp['axes.axisbelow'] = False
@@ -248,7 +248,7 @@ def get_error_estimates123(x, sorted=False, sigma="a"):
     --------
     >>> (m, l, h) = get_error_estimates123(x, sigma="a")
     """
-    xs = np.asarray(x)
+    xs = np.asarray(x)[0.39, 0.68], [-1, 20], [23.75, 23.875]
     if not sorted:
         xs.sort()
         xs = np.array(xs)
@@ -292,10 +292,10 @@ print("The 1 sigma error of the parameter Mcal is : ",  get_error_estimates123(M
 
 ### USE CHAIN CONSUMER TO GENERATE PLOTS ###
 
-params = [r"$\alpha$", "b", r"${M}$"]
+params = [r"$\alpha$", "b", r"${\cal{M}}$"]
 cc = ChainConsumer()
 c = cc.add_chain(flatchains_lcdm2000[:,:], parameters=params)
 truth = [BF[0], BF[1], BF[2]]
 c.configure(kde= True, max_ticks=7, summary = False, shade_alpha=0.9, tick_font_size=11, label_font_size=15, sigmas=[1, 2], linewidths=1.2, colors="#673AB7", sigma2d = False, shade =True, flip = False)
-fig = c.plotter.plot(figsize=2.0, extents=[[0.39, 0.68], [0, 16], [23.75, 23.875]], display=True, truth = truth)
+fig = c.plotter.plot(figsize=2.0, extents=[[0.39, 0.68], [-1, 20], [23.75, 23.875]], display=True, truth = truth)
 
