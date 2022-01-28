@@ -99,7 +99,6 @@ def H_aparam(z, b):
     ex = np.exp(integ)
     return ex*(H0)
 
-
 ### luminosity distance in the ( t-Λ (α fixed) ) model ###
 def dl_aparam(z, b):
     f = lambda y: (1/(H_aparam(y, b)))
