@@ -84,8 +84,6 @@ size = len(z_cmb)
 print(size)
 C_covn = np.linalg.inv([er_total]).reshape(1048, 1048)### the covariance matrix
 
-
-
 ### construct a q parameterization using the ΛCDM comoving distance ####
 def integrand(z) : ## substituting Omega_m = 0.3 and Omega_l = 0.7
     return np.sqrt(1/(0.3*((1+z)**3) + 0.7))
