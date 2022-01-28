@@ -344,15 +344,15 @@ print(AIC_tedsafxd, BIC_tedsafxd)
 daicteds = np.abs(AIC_teds - AIC_qlcdm)
 daictedsafxd = (AIC_tedsafxd - AIC_qlcdm)
 print(daicteds, daictedsafxd)
-# "The AIC difference between the t-Λ and the ΛCDM is:", 2.0855221542510662
-# "The AIC difference between the t-Λ (α fixed) and the ΛCDM is:", 0.37449446340451686
+# "The AIC difference between the t-EdS and the ΛCDM is:", 2.0855221542510662
+# "The AIC difference between the t-EdS (α fixed) and the ΛCDM is:", 0.37449446340451686
 
 ### BIC Differences (ΔBIC) ###
 dbicteds = np.abs(BIC_teds - BIC_qlcdm)
 dbictedsafxd = (BIC_tedsafxd - BIC_qlcdm)
 print(dbicteds, dbictedsafxd)
-# "The BIC difference between the t-Λ and the ΛCDM is:",  7.040161019132029
-# "The BIC difference between the t-Λ (α fixed) and the ΛCDM is:", 0.37449446340451686
+# "The BIC difference between the t-EdS and the ΛCDM is:",  7.040161019132029
+# "The BIC difference between the t-EdS (α fixed) and the ΛCDM is:", 0.37449446340451686
 
 
 
