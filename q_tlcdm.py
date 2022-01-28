@@ -297,7 +297,7 @@ fig, ax = plt.subplots()
 l = np.linspace(0.0, 3, 900)
 plt.plot(l,qv_lcdm(l,BF[0], BF[1]), color = 'r', label=(r"$\frac{ 1 } { 2 }\left(1-\frac{1}{a+b(\bar{\chi}_{\Lambda CDM})^3}\right)$"))
 
-plt.plot(l,qva_lcdm(l,BFa[0]), color = 'yellow',label=(r"$\frac{ 1 } { 2 }\left(1-\frac{1}{0.5+b(\bar{\chi}_{\Lambda CDM})^3}\right)$"))
+#plt.plot(l,qva_lcdm(l,BFa[0]), color = 'yellow',label=(r"$\frac{ 1 } { 2 }\left(1-\frac{1}{0.5+b(\bar{\chi}_{\Lambda CDM})^3}\right)$"))
 
 plt.plot(l,q_LCDM(l, BFlcdm[0]), color = 'blue', linestyle = "--" , label = (r"$q_{\Lambda CDM}$"))
 
