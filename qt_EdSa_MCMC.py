@@ -81,8 +81,6 @@ size = len(z_cmb)
 print(size)
 C_covn = np.linalg.inv([er_total]).reshape(1048, 1048)### the covariance matrix
 
-
-
 ### construct a q parameterization with respect to the Einstein de Sitter comoving distance ###
 def dc_eds(z): ### comoving distance in EdS Universe
     return 2*(1-((1+z)**(-1/2)))
