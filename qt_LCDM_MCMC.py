@@ -289,7 +289,6 @@ print("The 1 sigma error of the parameter a is : ",  get_error_estimates123(acha
 print("The 1 sigma error of the parameter b is : ",  get_error_estimates123(bchains, sigma="a"))
 print("The 1 sigma error of the parameter Mcal is : ",  get_error_estimates123(Mcalchains, sigma="a"))
 
-
 ### USE CHAIN CONSUMER TO GENERATE PLOTS ###
 
 params = [r"$\alpha$", "b", r"${\cal{M}}$"]
