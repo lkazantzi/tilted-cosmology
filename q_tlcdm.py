@@ -29,7 +29,7 @@ from matplotlib import rc
 rcp['figure.figsize'] = [9, 6]
 rcp['figure.dpi'] = 80
 rcp['xtick.labelsize'] = 15
-rcp['ytick.labelsize'] = 0
+rcp['ytick.labelsize'] = 15
 rcp['axes.formatter.useoffset'] = False
 rcp['axes.linewidth'] = 1.5
 rcp['axes.axisbelow'] = False
@@ -296,12 +296,12 @@ BFlcdm = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q_LCDM/OmMcal_
 
 ### Plot of the t-Λ, t-Λ (α fixed) and standard LCDM models ###
 fig, ax = plt.subplots()
-l = np.linspace(0.0, 6, 900)
-plt.plot(l,qv_lcdm(l,BF[0], BF[1]), color = 'yellow', label=(r"$\frac{ 1 } { 2 }\left(1-\frac{1}{0.5+b(\chi_{\Lambda CDM})^3}\right)$"))
+l = np.linspace(0.0, 3, 900)
+plt.plot(l,qv_lcdm(l,BF[0], BF[1]), color = 'r', label=(r"$\frac{ 1 } { 2 }\left(1-\frac{1}{a+b(\bar{\chi}_{\Lambda CDM})^3}\right)$"))
 
-plt.plot(l,qva_lcdm(l,BFa[0]), color = 'r',label=(r"$\frac{ 1 } { 2 }\left(1-\frac{1}{a+b(\chi_{\Lambda CDM})^3}\right)$"))
+plt.plot(l,qva_lcdm(l,BFa[0]), color = 'yellow',label=(r"$\frac{ 1 } { 2 }\left(1-\frac{1}{0.5+b(\bar{\chi}_{\Lambda CDM})^3}\right)$"))
 
-plt.plot(l,q_LCDM(l, BFlcdm[0]), color = 'b', label='qLCDM')
+plt.plot(l,q_LCDM(l, BFlcdm[0]), color = 'blue', linestyle = "--" , label = (r"$q_{\Lambda CDM}$"))
 
 plt.rc('text', usetex=True)
 ax.spines['bottom'].set_position('zero')
@@ -312,10 +312,11 @@ ax.spines['top'].set_color('none')
 # Show ticks in the left and lower axes only
 ax.xaxis.set_ticks_position('bottom')
 ax.yaxis.set_ticks_position('left')
-plt.xlabel('redshift (z)', loc='right')
-ax.set_xticks([0.6, 1,2,3,4, 5, 6])
-ax.set_yticks([-0.5,0, 0.2, 0.5])
-ax.legend(fontsize = 'large', loc="lower right")
+ax.set_xlabel('redshift (z)', loc='right')
+ax.set_ylabel(' $\widetilde{q}$', loc='top', rotation = 0)
+ax.set_yticks([-0.5, -0.4, -0.2, 0.2, 0.5])
+ax.set_xticks([0.5, 1,1.5, 2])
+ax.legend(fontsize = 'small', loc="lower right"))
 plt.show()
 
 ###########################
