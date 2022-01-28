@@ -140,7 +140,6 @@ def dl_param(z,a,b):
     return inte*c_km*(1+z)
 
 
-
 ### luminosity distance in the ( t-Λ (α fixed) ) model ###
 def dl_aparam(z, b):
     f = lambda y: (1/(H_aparam(y, b)))
@@ -302,7 +301,7 @@ plt.plot(l,qv_lcdm(l,BF[0], BF[1]), color = 'r', label=(r"$\frac{ 1 } { 2 }\left
 plt.plot(l,qva_lcdm(l,BFa[0]), color = 'yellow',label=(r"$\frac{ 1 } { 2 }\left(1-\frac{1}{0.5+b(\bar{\chi}_{\Lambda CDM})^3}\right)$"))
 
 plt.plot(l,q_LCDM(l, BFlcdm[0]), color = 'blue', linestyle = "--" , label = (r"$q_{\Lambda CDM}$"))
-
+    return inte*c_km*(1+z)
 plt.rc('text', usetex=True)
 ax.spines['bottom'].set_position('zero')
 ax.spines['left'].set_position('zero')
