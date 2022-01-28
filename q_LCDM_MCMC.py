@@ -27,7 +27,7 @@ from matplotlib import rcParams as rcp
 rcp['figure.figsize'] = [9, 6]
 rcp['figure.dpi'] = 80
 rcp['xtick.labelsize'] = 15
-rcp['ytick.labelsize'] = 0
+rcp['ytick.labelsize'] = 15
 rcp['axes.formatter.useoffset'] = False
 rcp['axes.linewidth'] = 1.5
 rcp['axes.axisbelow'] = False
@@ -136,40 +136,44 @@ def chi(params):
 
 ### define the prior
 
+###   Set up a flat prior on a paramater.
+###    Out of the bounds, the prior return -infinity, else it returns 0.
 def lnprior_lcdm(theta):
     om, Mcal = theta
-    if 0.1 < om < 0.9 and 23.0 < Mcal < 24.0:  
+    if 0.1 < om < 0.9 and 23.0 < Mcal < 24.0:
         return 0.0
     return -np.inf
 
-theta = [0.3, 23.81]
 ### combine into full log-probability function
 def lnprob_lcdm(theta):
     lp = lnprior_lcdm(theta)
     if not np.isfinite(lp):
         return -np.inf
-    
-    return lp + (-0.5*chi(theta))
-print(lnprob_lcdm(theta))
+    return lp + (-0.5*chi_lcdm(theta))
+
 ### define no of parameters and walkers
+### ndiml is the number of dimensions, i.e. the number of free parameters
 ndiml, nwalkersl = 2, 100
-### initial
-initial = np.array([0.299, 23.810])
+### initial values
+initial = np.array([0.3, 23.8])
 posl = [np.array(initial) + 0.0001*np.random.randn(ndiml) for i in range(nwalkersl)]
 ### run mcmc using multiprocessing
+### Run MCMC with Multiple Cores
+with Pool() as pool:
+    samplerl = emcee.EnsembleSampler(nwalkersl, ndiml, lnprob_lcdm, pool=pool)
+    resultl = samplerl.run_mcmc(posl, 2000, progress = True) #2000 is the number of MCMC steps to take
+### The samplerl will give an array with thes shape (2000, 100, 2) giving the parameter values for each walker at each step in the chain.
 
-pool = Pool(processes=8) # no of cpus which I want to use for multiprocessing.
-samplerl = emcee.EnsembleSampler(nwalkersl, ndiml, lnprob_lcdm, pool)
-resultl = samplerl.run_mcmc(posl, 2000, progress = True) # 2000 is the no of steps
+### Get autocorrelation time
+om_ac, M_cal_ac = samplerl.get_autocorr_time(quiet=True)
+np.savetxt("fullflatchains_lcdm_2000", samplerl.get_chain(flat=True))
+# thin out the chain
+flat_samplesl = samplerl.get_chain(discard=20, flat=True, thin=int(max([om_ac, M_cal_ac])))
+np.savetxt("flatchains_lcdm_2000 ", flat_samplesl)
 
-np.savetxt("fullflatchains_eds_longerchain ",sampler_eds.get_chain(flat=True))
-### thin out the chain
-flat_samples_eds = sampler_eds.get_chain(discard=20, flat=True, thin=(int(max[a_ac, b_ac, M_cal_ac])))
-np.savetxt("flatchains_eds_longerchain ",flat_samples_eds)
+print("Number of independent samples is {}".format(len(flat_samplesl)))
 
-print("Number of independent samples is {}".format(len(flat_samples_eds)))
-
-### The flatchains from the MCMC analysis discarded the burn-in steps 
+### Retrieve the flatchains from the MCMC analysis discarded the burn-in steps 
 flatchains2000 = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q_LCDM/flatchains_lcdm_2000")
 ###  The maximum likelihood values for the ΛCDM model are found in the q_tEdS.py and q_tlcdm.py
 BF_LCDM = [0.299, 23.809]
@@ -279,7 +283,7 @@ print("The 1 sigma error of the parameter Mcal is : ",  get_error_estimates123(f
 
 params = ["Om", "Mcal"]
 cc = ChainConsumer()
-truth = [BF_LCDM[0], BF_LCDM[1]] # BF_LCDM[0] = 0.29948, BF_LCDM[1] = 23.80cc = ChainConsumer()
+truth = [BF_LCDM[0], BF_LCDM[1]] # BF_LCDM[0] = 0.29948, BF_LCDM[1] = 23.80
 c = cc.add_chain(flatchains2000[:,:], parameters=params)
-c.configure(max_ticks=7, summary = True, shade_alpha=0.9, tick_font_size=11, label_font_size=15, sigmas=[1, 2], linewidths=1.2, colors="#673AB7", sigma2d = False, shade =True, flip = False)
+c.configure(max_ticks=7, summary = False, shade_alpha=0.9, tick_font_size=11, label_font_size=15, sigmas=[1, 2], linewidths=1.2, colors="#673AB7", sigma2d = False, shade =True, flip = False)
 fig = c.plotter.plot(figsize=2.0, extents=[[0.16, 0.40], [23.75, 23.875]], display=True, truth = truth)
