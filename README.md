@@ -20,7 +20,7 @@ We study a parametrization of the deceleration parameter in a tilted universe, n
 Regarding the relevant Mathematica codes, the file `Tilted Cosmology.nb` corresponds to the Mathematica code in order to obtain the results of the maximum likelihood method for all the models described in Table I. The file `Information Criteria.nb` corresponds to the calculations of Table II. The best fit results were obtained with Mathematica 11. 
 
 ### Python Files
-Regarding the relevant Python codes, the files `q_tEdS.py` and `q_tlcdm.py` contain the functions and the optimisation methods developped for calculating the best-fit parameters for the tilted Einstein-de Sitter and the tilted ΛCDM model respectively. The files above contain also the calculations for the information criteria, in Table II. 
+Regarding the relevant Python codes, the files `q_tEdS.py` and `q_tlcdm.py` contain the functions and the optimisation methods developped for calculating the best-fit parameters for the tilted Einstein-de Sitter and the tilted ΛCDM model respectively. The files above contain also the calculations for the information criteria, in Table II. The file `q_tEdS.py` contains also the information for the the figure 1 (left panel) of the article. The codes for the reproduction of the figure 1 of the article are found in the files `q_tEdS.py` (for the left panel) and `q_tlcdm.py` (right panel). 
 
 *Few words about the MCMC analysis*
 
