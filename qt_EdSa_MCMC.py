@@ -23,7 +23,7 @@ from matplotlib import rcParams as rcp
 rcp['figure.figsize'] = [9, 6]
 rcp['figure.dpi'] = 80
 rcp['xtick.labelsize'] = 15
-rcp['ytick.labelsize'] = 0
+rcp['ytick.labelsize'] = 15
 rcp['axes.formatter.useoffset'] = False
 rcp['axes.linewidth'] = 1.5
 rcp['axes.axisbelow'] = False
@@ -286,7 +286,7 @@ print("The 1 sigma error of the parameter Mcal is : ",  get_error_estimates123(f
 
 ### USE CHAIN CONSUMER TO GENERATE PLOTS ###
 
-params = [r"b", r"${M}$"]
+params = [r"b", r"${\cal{M}}$"]
 cc = ChainConsumer()
 c = cc.add_chain(flatchains_edsa[:,:], parameters=params)
 c.configure(kde= True, max_ticks=7, summary = False, shade_alpha=0.9, tick_font_size=11, label_font_size=15, sigmas=[1, 2], linewidths=1.2, colors="#673AB7", sigma2d = False, shade =True, flip = False)
