@@ -98,7 +98,7 @@ def q_LCDM(z, Om, w=-1): # with w the equation of state
 print(q_LCDM(0.0, 0.3))
 
 ### construct the comoving distance of the Einstein-de Sitter (EdS) model ###
-# Multiply with H0/c_km in order for the deceleration parameter to be non-dimensional
+# Multiply with H0/c_km in order for the deceleration parameter to be dimensionless
 def dc_eds(z):
     #return (2*c_km/H0)*(1-((1+z)**(-1/2)))
     return 2*(1-((1+z)**(-1/2)))
@@ -117,14 +117,6 @@ def qa_eds(z,b):
     return 0.5 *(1 -(1/(((np.power(dc_eds(z), 3))*b)+0.5)))
 qva_eds = np.vectorize(qa_eds)
 
-### standard ΛCDM q parametrization ###
-def q_LCDM(z, Om, w=-1):    ### q in LCDM model with w=-1 
-    #up = Om*((1+z)**3)+(1+3*w)*(1-Om)*(1+z)**(3*(1+w))
-    up = (Om*(1+z)**3) - (2*(1-Om))
-    #down = 2*(Om*((1+z)**3)+(1-Om)*((1+z)**(3*(1+w))))
-    down = 2*(Om*((1+z)**3) + 1-Om)
-    return up/(down)
-print(q_LCDM(0.0, 0.3))
 
 ### Hubble parameter in the ( t-EdS ) model ###
 def H_eds(z,a, b):
@@ -132,7 +124,6 @@ def H_eds(z,a, b):
     integ = quad(f, 0.0, z, epsabs=np.inf)[0]
     ex = np.exp(integ)
     return ex*(H0)
-print(H_eds(0.01, 0.5, 20))
 
 ### Hubble parameter in the ( t-EdS (α fixed) ) ###
 def Ha_eds(z, b):
