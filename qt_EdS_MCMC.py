@@ -112,7 +112,6 @@ def m_eds(z,a, b, Mcal):
         #Mcal = M +42.38 - 5*np.log10(cosmo.h)
     return np.hstack([5*np.log10(Dl_eds(z[i],a, b)) + Mcal for i in range(size)])
 
-
 ### construct the chi squared function in EdS ###
 def chi_eds(params):
     a = params[0]
