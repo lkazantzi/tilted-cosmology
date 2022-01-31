@@ -134,7 +134,7 @@ theta = [0.52, 6.5, 23.815]
 def lnprior_eds(theta):
     a, b, Mcal = theta
 ### define priors 
-    if 0.1 < a < 0.9 and 0.0 < b < 35 and 22.0 < Mcal < 24.0:
+    if 0.1 < a < 0.9 and 0.0 < b < 35 and 23.0 < Mcal < 24.0:
         return 0.0
     return -np.inf
 print(lnprior_eds(theta))
