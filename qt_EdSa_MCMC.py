@@ -132,7 +132,7 @@ def chi_edsa(params):
 def lnprior_eds(theta):
     b, Mcal = theta
 ### define priors 
-    if 0.0 < b < 35 and 22.0 < Mcal < 24.0:
+    if 0.0 < b < 35 and 23.0 < Mcal < 24.0:
         return 0.0
     return -np.inf
 print(lnprior_eds(theta))
