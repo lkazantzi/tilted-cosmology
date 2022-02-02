@@ -1,4 +1,4 @@
-# Observational Constraints on the Deceleration Parameter in the Tilted Frame
+# Observational Constraints on the Deceleration Parameter in a Tilted Universe
 
 [![Travis](https://img.shields.io/badge/language-Mathematica-green.svg)]()
 [![Travis](https://img.shields.io/badge/language-Python-yellow.svg)]()
