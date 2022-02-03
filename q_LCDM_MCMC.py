@@ -189,7 +189,6 @@ for i in range(2):
     plt.axhline(y = BF_LCDM[i], color = "red")
     plt.show()
 
-
  ### Compute the sigma errors ###
 def quantile(sorted_array, f):
     """Return the quantile element from sorted array. The quantile is determined by the f, where f is [0,1]. 
