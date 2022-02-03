@@ -145,7 +145,7 @@ def lnprobl(theta):
     if not np.isfinite(lp):
         return -np.inf
 
-    return lp + (-0.5*chia_param(theta))
+    return lp + (-0.5*chi_aparam(theta))
 
 ### define no of parameters and walkers
 ### ndim defines the number of dimensions (parameters)
