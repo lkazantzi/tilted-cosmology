@@ -31,7 +31,7 @@ The Python libraries needed to run the files are reported in the `requirements.t
 
 ## Citing the paper 
 If you use any of the above codes or the figures in a published work please cite the following paper:
-<br>*Observational Constraints on the Deceleration Parameter in the Tilted Frame*
+<br>*Observational Constraints on the Deceleration Parameter in a Tilted Universe*
 <br>Kerkyra Asvesta, Lavrentios Kazantzidis, Leandros Perivolaropoulos, and Christos Tsagas
 
 Any further questions/comments are welcome.
