@@ -146,7 +146,7 @@ def lnprob_eds(theta):
     if not np.isfinite(lp):
         return -np.inf
     
-    return lp + (-0.5*chi_eds(theta))
+    return lp + (-0.5*chi_edsa(theta))
 
 ### test the result of the posterior
 print(lnprob_eds(theta))
