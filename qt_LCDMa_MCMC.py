@@ -120,8 +120,8 @@ def m_atheparam(z, b, Mcal):
 ### construct the chi squared function for the ( t-Λ (α fixed) ) ###
 # the tilted ( t-Λ (α fixed) ) model contains 2 free parameters, b, Mcal
 def chi_aparam(aparams):
-    b = aparams["b"].value
-    Mcal = aparams["Mcal"].value
+    b = aparams[0]
+    Mcal = aparams[1]
     res1 = np.array([m_atheparam(z_cmb, b, Mcal) - mb]).reshape(1, 1048)
     res3 = np.array([m_atheparam(z_cmb, b, Mcal) - mb]).reshape(1048, )
     return np.sum(np.linalg.multi_dot([res1, C_covn, res3]))
