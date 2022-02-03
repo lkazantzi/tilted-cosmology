@@ -149,7 +149,7 @@ def lnprob_lcdm(theta):
     lp = lnprior_lcdm(theta)
     if not np.isfinite(lp):
         return -np.inf
-    return lp + (-0.5*chi_lcdm(theta))
+    return lp + (-0.5*chi(theta))
 
 ### define no of parameters and walkers
 ### ndiml is the number of dimensions, i.e. the number of free parameters
