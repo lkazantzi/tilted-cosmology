@@ -8,7 +8,7 @@
 <img src="preview.png" width="820" title="preview" />
 </p>
 
-This is the repository that contains the corresponding Mathematica and Python files as well as useful comments that reproduce the figures of our work. 
+This is the repository that contains the corresponding Mathematica and Python files as well as useful comments that reproduce the figures of [arxiv:2202.00962](https://arxiv.org/pdf/2202.00962.pdf).
 
 
 ## Abstract
