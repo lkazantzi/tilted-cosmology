@@ -175,14 +175,6 @@ print("Number of independent samples is {}".format(len(flat_samplesl)))
 
 ### Retrieve the flatchains from the MCMC analysis discarded the burn-in steps 
 flatchains2000 = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q_LCDM/flatchains_lcdm_2000")
-###  The maximum likelihood values for the ΛCDM model can be found using the Analysis class of the Chain Consumer
-cc = ChainConsumer()
-params = ["Om", "Mcal"]
-c = cc.add_chain(flatchains2000[:,:], parameters=params)
-c.analysis.get_summary()
-BF_LCDM = c.analysis.get_summary().values()
-bf_om = list(BF_LCDM)[0][1]
-bf_mcal = list(BF_LCDM)[1][1]
 
 params = ["Om", "Mcal"]
 ### plot the chains for each parameter 
@@ -195,8 +187,14 @@ for i in range(2):
     plt.show()
 
 ### USE CHAIN CONSUMER TO GENERATE PLOTS ###
-
-truth = [bf_om, bf_mcal] 
+cc = ChainConsumer()
+params = ["Om", "Mcal"]
 c = cc.add_chain(flatchains2000[:,:], parameters=params)
-c.configure(max_ticks=7, summary = True, shade_alpha=0.9, tick_font_size=11, label_font_size=15, sigmas=[1, 2], linewidths=1.2, colors="#673AB7", sigma2d = False, shade =True, flip = False)
+c.configure(contour_labels="confidence", kde= True, statistics="max",summary = False, shade_alpha=0.9,tick_font_size=11, label_font_size=15, sigmas=[1, 2], linewidths=1.2, colors="#673AB7", sigma2d = False, shade =True, flip = False)
+
+###  The maximum likelihood values for the ΛCDM model can be found using the Analysis class of the Chain Consumer
+BF_LCDM = c.analysis.get_summary().values()
+bf_om = list(BF_LCDM)[0][1]
+bf_mcal = list(BF_LCDM)[1][1]
+truth = [bf_om, bf_mcal] 
 fig = c.plotter.plot(figsize=2.0, extents=[[0.16, 0.40], [23.75, 23.875]], display=True, truth=truth)
