@@ -172,119 +172,32 @@ flat_samples_eds = sampler_eds.get_chain(discard=20, flat=True, thin=(int(max[a_
 np.savetxt("flatchains_eds_2000 ",flat_samples_eds)
 
 print("Number of independent samples is {}".format(len(flat_samples_eds)))
-### the best-fit values of the tilted Enstein-de Sitter model (t-EdS)
-BF_eds = [0.521, 6.66, 23.815]
+
 ### The flatchains from the MCMC analysis discarded the burn-in steps 
 flatchains2000 = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_EdS_1048/flatchains_eds_2000")
 
 
 ### plot the chains for each parameter 
 params = ["a", "b", "Mcal"]
-
 for i in range(3):
     plt.figure()
     plt.title(params[i])
     x = np.arange(len(flatchains2000[:,i]))
     plt.plot(x,flatchains2000[:,i])
-    plot.axhline(y = BF_eds[i], color = "red")
     plt.show()
 
 
-### Compute the sigma errors ###
-
-def quantile(sorted_array, f):
-    """Return the quantile element from sorted array. The quantile is determined by the f, where f is [0,1]. 
-    For example, to compute the value of the 75th percentile f should have the value 0.75.
-
-    Based on the description of the GSL routine
-    gsl_stats_quantile_from_sorted_data - e.g.
-    http://www.gnu.org/software/gsl/manual/html_node/Median-and-Percentiles.html
-
-    sorted_array is assumed to be 1D and sorted.
-    """
-    sorted_array = np.asarray(sorted_array)
-
-    if len(sorted_array.shape) != 1:
-        raise RuntimeError("Error: input array is not 1D")
-    n = sorted_array.size
-    
-    """
-    The quantile is found by interpolation using the formula below 
-    """
-    
-    quantile = (n - 1) * f
-    i = np.int64(np.floor(quantile))
-    delta = quantile - i
-
-    return (1.0 - delta) * sorted_array[i] + delta * sorted_array[i + 1]
-
-
-### Calculate the 68%, 95%, 99.7% C.L. of the parameters
-def get_error_estimates123(x, sorted=False, sigma="a"):
-    """Compute the median and (-1,+1) sigma values for the data.
-    Parameters
-    ----------
-    sigma defines the confidence interval. If default, the functions gives the 1sigma unvertainty
-    for the input parameter. If sigma=2, then it gives the 2sigma uncertainty (~95%) and
-    when sigma=3, then the function returns the 3sigma uncertainty(~99%) 
-    
-    Returns
-    -------
-    (median, lsig, usig)
-       The median, value that corresponds to -1 sigma, and value that
-       is +1 sigma, for the input distribution.
-
-    Examples
-    --------
-    >>> (m, l, h) = get_error_estimates123(x, sigma="a")
-    """
-    xs = np.asarray(x)
-    if not sorted:
-        xs.sort()
-        xs = np.array(xs)
-    listm = []
-    listl = []
-    listh = []
-    if sigma == "a":
-        sigfrac = 0.683    ### 1-sigma
-        median = quantile(xs, 0.5)
-        lval = quantile(xs, (1 - sigfrac) / 2.0)
-        hval = quantile(xs, (1 + sigfrac) / 2.0)
-        listm.append(median)
-        listl.append( lval-median)
-        listh.append(hval-median)
-
-    elif sigma =="b":
-        sigfrac = 0.9545    ### 2-sigma
-        median = quantile(xs, 0.5)
-        lval = quantile(xs, (1 - sigfrac) / 2.0)
-        hval = quantile(xs, (1 + sigfrac) / 2.0)
-        listm.append(median)
-        listl.append( lval-median)
-        listh.append(hval-median)
-    elif sigma == "c":
-        sigfrac = 0.9973     ### 3-sigma
-        median = quantile(xs, 0.5)
-        lval = quantile(xs, (1 - sigfrac) / 2.0)
-        hval = quantile(xs, (1 + sigfrac) / 2.0)
-        listm.append(median)
-        listl.append( lval-median)
-        listh.append(hval-median)
-
-    else:
-        print("Invalid sigma number")
-    return (listm, listl, listh) 
-
-
-print("The 1 sigma error of the parameter a is : ",  get_error_estimates123(flatchains2000[:, 0], sigma="a"))
-print("The 1 sigma error of the parameter b is : ",  get_error_estimates123(flatchains2000[:, 1], sigma="a"))
-print("The 1 sigma error of the parameter Mcal is : ",  get_error_estimates123(flatchains2000[:, 2], sigma="a"))
-
 
 ### USE CHAIN CONSUMER TO GENERATE PLOTS ###
-
-params = [r"$\alpha$", "b", r"${\cal{M}}$"]
 cc = ChainConsumer()
+params = [r"$\alpha$", "b", r"${\cal{M}}$"]
 c = cc.add_chain(flatchains2000[:,:], parameters=params)
 c.configure(kde= True, max_ticks=7, summary = False, shade_alpha=0.9, tick_font_size=11, label_font_size=15, sigmas=[1, 2], linewidths=1.2, colors="#673AB7", sigma2d = False, shade =True, flip = False)
-fig = c.plotter.plot(figsize=2.0, extents=[[0.39, 0.68], [0, 25], [23.75, 23.875]], display=True, truth = [BF_eds[0], BF_eds[1], BF_eds[2]])
+###  The maximum likelihood values for the t-EdS model can be found using the Analysis class of the Chain Consumer
+BF_EdS = c.analysis.get_summary().values()
+bf_a = list(BF_EdS)[0][1]
+bf_b = list(BF_EdS)[1][1]
+bf_mcal = list(BF_EdS)[2][1]
+print(bf_a, bf_b, bf_mcal)
+
+fig = c.plotter.plot(figsize=2.0, extents=[[0.39, 0.68], [0, 25], [23.75, 23.875]], display=True, truth = [bf_a, bf_b, bf_mcal])
