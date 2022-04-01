@@ -169,8 +169,7 @@ np.savetxt("flatchains_qla_LCDM",flat_samplesl)
 
 ### The flatchains from the MCMC analysis discarded the burn-in steps 
 flatchains_qla_LCDM = np.loadtxt("/home/kerky/anaconda3/test_q/resultsfromq(L)/q(l)_LCDM_1048/flatchains_qla_LCDM")
-### the best-fit values of the tilted ΛCDM model (a fixed)(t-ΛCDM (a fixed))
-BF_aLCDM = [5.204, 23.807]
+
 params = ["b", "Mcal"]
 ### plot the chains for each parameter 
 for i in range(2):
@@ -178,95 +177,7 @@ for i in range(2):
     plt.title(params[i])
     x = np.arange(len(flatchains_qla_LCDM[:,i]))
     plt.plot(x,flatchains_qla_LCDM[:,i])
-    plt.axhline(y = BF_aLCDM[i], color = "red")
     plt.show()
-
-
- ### Compute the sigma errors ###
-
-### Compute the sigma errors ###
-def quantile(sorted_array, f):
-    """Return the quantile element from sorted_array, where f is [0,1]
-    using linear interpolation.
-
-    Based on the description of the GSL routine
-    gsl_stats_quantile_from_sorted_data - e.g.
-    http://www.gnu.org/software/gsl/manual/html_node/Median-and-Percentiles.html
-    but all errors are my own.
-
-    sorted_array is assumed to be 1D and sorted.
-    """
-    sorted_array = np.asarray(sorted_array)
-
-    if len(sorted_array.shape) != 1:
-        raise RuntimeError("Error: input array is not 1D")
-    n = sorted_array.size
-
-    q = (n - 1) * f
-    i = np.int64(np.floor(q))
-    delta = q - i
-
-    return (1.0 - delta) * sorted_array[i] + delta * sorted_array[i + 1]
-
-
-### Calculate the 68%, 95%, 99.7% C.L. of the parameters
-def get_error_estimates123(x, sorted=False, sigma="a"):
-    """Compute the median and (-1,+1) sigma values for the data.
-    Parameters
-    ----------
-    sigma defines the confidence interval. If default, the functions gives the 1sigma unvertainty
-    for the input parameter. If sigma=2, then it gives the 2sigma uncertainty (~95%) and
-    when sigma=3, then the function returns the 3sigma uncertainty(~99%) 
-    
-    Returns
-    -------
-    (median, lsig, usig)
-       The median, value that corresponds to -1 sigma, and value that
-       is +1 sigma, for the input distribution.
-
-    Examples
-    --------
-    >>> (m, l, h) = get_error_estimates123(x, sigma="a")
-    """
-    xs = np.asarray(x)
-    if not sorted:
-        xs.sort()
-        xs = np.array(xs)
-    listm = []
-    listl = []
-    listh = []
-    if sigma == "a":
-        sigfrac = 0.683    ### 1-sigma
-        median = quantile(xs, 0.5)
-        lval = quantile(xs, (1 - sigfrac) / 2.0)
-        hval = quantile(xs, (1 + sigfrac) / 2.0)
-        listm.append(median)
-        listl.append( lval-median)
-        listh.append(hval-median)
-
-    elif sigma =="b":
-        sigfrac = 0.9545    ### 2-sigma
-        median = quantile(xs, 0.5)
-        lval = quantile(xs, (1 - sigfrac) / 2.0)
-        hval = quantile(xs, (1 + sigfrac) / 2.0)
-        listm.append(median)
-        listl.append( lval-median)
-        listh.append(hval-median)
-    elif sigma == "c":
-        sigfrac = 0.9973     ### 3-sigma
-        median = quantile(xs, 0.5)
-        lval = quantile(xs, (1 - sigfrac) / 2.0)
-        hval = quantile(xs, (1 + sigfrac) / 2.0)
-        listm.append(median)
-        listl.append( lval-median)
-        listh.append(hval-median)
-
-    else:
-        print("Invalid sigma number")
-    return (listm, listl, listh) 
-
-print("The 1 sigma error of the parameter b is : ",  get_error_estimates123(flatchains_qla_LCDM[:, 0], sigma="a"))
-print("The 1 sigma error of the parameter Mcal is : ",  get_error_estimates123(flatchains_qla_LCDM[:, 1], sigma="a"))
 
 
 
@@ -275,7 +186,12 @@ print("The 1 sigma error of the parameter Mcal is : ",  get_error_estimates123(f
 params = ["b",r"${\cal{M}}$"]
 cc = ChainConsumer()
 c = cc.add_chain(flatchains_qla_LCDM[:,:], parameters=params)
-truth =  [BF_aLCDM[0], BF_aLCDM[1]]
-c.configure(kde= True, max_ticks=7, summary = False, shade_alpha=0.9, tick_font_size=11, label_font_size=15, sigmas=[1, 2], linewidths=1.2, colors="#673AB7", sigma2d = False, shade =True, flip = False)
+c.configure(contour_labels="confidence", kde= True, statistics="max",summary = False, shade_alpha=0.9,tick_font_size=11, label_font_size=15, sigmas=[1, 2], linewidths=1.2, colors="#673AB7", sigma2d = False, shade =True, flip = False)
+
+###  The maximum likelihood values for the t-Λ with a cst model can be found using the Analysis class of the Chain Consumer
+BF_LCDMa = c.analysis.get_summary().values()
+bf_b = list(BF_LCDMa)[0][1]
+bf_mcal = list(BF_LCDMa)[1][1]
+truth = [bf_b, bf_mcal] 
 fig = c.plotter.plot(figsize=2.0, extents=[[0, 16], [23.75, 23.875]], display=True, truth = truth)
 
